@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Nov 16 07:01:46 2023
+# Module 1 - Create a Blockchain
 
-@author: Rajvir
-"""
+#To be installed: 
+    #Flask==0.12.2: pip install Flask==0.12.2
+    #Postman HTTP Client: https://www.getpostman.com/
 
