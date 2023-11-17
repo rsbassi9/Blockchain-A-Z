@@ -21,5 +21,19 @@ class Blockchain:
     def __init__(self):
         self.chain = []     # Variable for The chain containing the blocks initialized as a list
         self.create_block(proof = 1, previous_hash = '0')    # Variable for Genesis block, created using the create_block function. arguments: proof = arbitrary number, previous hash (arbitraty for genesis block)
+        
+   
+    # Define a new create block function that will to be implemented right after mining a block
+    # It will get the proof of work needed to be solved. once solved, a new block is created and 
+    # will be added to the blockchain. The new block will contain the index, the timestamp, proof and previous hash
+    def create_block(self, poof, previous_hash):
+        
+        # Variable block is a dictionary containing each block, with 4 essential keys: index of block, timestamp, proof of the block, previous hash. This can potentiall include transactions, cryptocurrency
+        block = {'index' : len(self.chain) + 1,
+                 'timestamp' : str(datetime.datetime.now()), #Make the datetime a string for json format
+                 'proof' : proof,
+                 'previous_hash' : previous_hash} 
+        self.chain.append(block) # add the newly created block to the chain
+        return block # return the block for display in postman
 
 # Part 2 - Mining our Blockchain
