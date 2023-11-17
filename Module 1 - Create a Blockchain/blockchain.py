@@ -51,6 +51,6 @@ class Blockchain:
                 check_proof = True
             else:                                   # If false, we give the iteration another try adn increment new_proof by 1
                 new_proof += 1
-        
+        return new_proof
         
 # Part 2 - Mining our Blockchain
