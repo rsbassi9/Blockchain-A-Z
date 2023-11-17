@@ -53,16 +53,32 @@ class Blockchain:
                 new_proof += 1
         return new_proof
     
-    # Implement a function to check if the previous block hash matches, and if the proof od work has been solved (with 4 leading 0's)
+    # Implement a function to check if the previous block hash matches, and if the proof of work has been solved (with 4 leading 0's)
     # It will return the cyptographic hash of our block
     def hash(self, block):
        encoded_block = json.dumps(block, sort_keys = True).encode()                        # Encode our block so it can be accepted by the SHA256 function. dumps function used to make the block dictionary a string. encode into the ocrrect format
        return hashlib.sha256(encoded_block).hexdigest()
    
-    
-    
-    
-    
+    # Make the final function to return true if everything is right in the blockchain (if each block has a valid POW and the previous hash of a block is equal to the hash of the previous block)
+    # Chain is an argument, since we will need to perform this check on each block in the chain - loop through each blocks index for this
+    def is_chain_valid(self, chain):
+        previous_block = chain[0]  # Initial parameters of the blockchain, starting at block 1
+        block_index = 1
+        while block_index < len(chain):   # Loop until we reach the final index of the chain
+            # perform the 2 checks
+            # Check 1:
+            block = chain[block_index]      # The current block
+            if block['previous_hash'] != self.hash(previous_block):   # If the 'previous_hash' of the current block is different from the hash of the previous_block, the chain is not valid - return false
+                return False 
+            # Check 2: check if the hash operation starts with 4 0's
+            previous_proof = previous_block['proof']  # Get the proof key of the previous block
+            proof = block['']    # Get the proof of the current block
+            hash_operation = hashlib.sha256(str(proof**2 - previous_proof**2).encode()).hexdigest()
+            if hash_operation[:4] != '0000':
+                return False
+            previous_block = block     # Update our loop variable block index and our previous block variable. In the next iteration, the previous block becomes the current block
+            block_index += 1
+        return True
     
         
 # Part 2 - Mining our Blockchain
