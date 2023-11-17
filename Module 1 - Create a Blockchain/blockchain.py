@@ -72,7 +72,7 @@ class Blockchain:
                 return False 
             # Check 2: check if the hash operation starts with 4 0's
             previous_proof = previous_block['proof']  # Get the proof key of the previous block
-            proof = block['']    # Get the proof of the current block
+            proof = block['proof']    # Get the proof of the current block
             hash_operation = hashlib.sha256(str(proof**2 - previous_proof**2).encode()).hexdigest()
             if hash_operation[:4] != '0000':
                 return False
