@@ -35,5 +35,9 @@ class Blockchain:
                  'previous_hash' : previous_hash} 
         self.chain.append(block) # add the newly created block to the chain
         return block # return the block for display in postman
+    
+    # Define a function to get the last block of the current chain we are dealing with at any time
+    def get_previous_block(self):
+        return self.chain[-1]   # Get the last index of the chain
 
 # Part 2 - Mining our Blockchain
