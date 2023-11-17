@@ -19,7 +19,7 @@ from flask import Flask, jsonify
 class Blockchain:
     
     def __init__(self):
-        self.chain = []     # The chain containing the blocks initialized as a list
-        self.create_block(proof = 1, previous_hash = '0')    # Genesis block, created using the create_block function. arguments: proof = arbitrary number, previous hash (arbitraty for genesis block)
+        self.chain = []     # Variable for The chain containing the blocks initialized as a list
+        self.create_block(proof = 1, previous_hash = '0')    # Variable for Genesis block, created using the create_block function. arguments: proof = arbitrary number, previous hash (arbitraty for genesis block)
 
 # Part 2 - Mining our Blockchain
