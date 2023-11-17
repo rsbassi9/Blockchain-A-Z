@@ -39,5 +39,18 @@ class Blockchain:
     # Define a function to get the last block of the current chain we are dealing with at any time
     def get_previous_block(self):
         return self.chain[-1]   # Get the last index of the chain
-
+    
+    # Define a proof of work - hard to solve, easy to verify
+    # Previous prrof is an element of the problem that miners will need to coonsider to find the new proof
+    def proof_of_work(self, previous_proof):
+        new_proof = 1      # Problem is solved through trial and error, incrementing the proof each time, starting at 1
+        check_proof = False     # Initialize to False. When we run the loop and the new proof is found, this turns to true
+        while check_proof is False:      # Define the problem the miners need to solve for check_proof to be true: 4 leading zero problem using SHA256. (the more the leading zeros, the harder the problem is to solve)
+            hash_operation = hashlib.sha256(str(new_proof**2 - previous_proof**2).encode()).hexdigest()    # The hash function needs to be non-symmetrical , ie the function read forward is not eaqual to the function read backwards. This can be made as challenging as you like.encode and hexdigest dunctions used to output the hash function in the correct format
+            if hash_operation[:4] == '0000':        # If the hash output has 4 leading zeros, then check_proof is true, the block can be mined
+                check_proof = True
+            else:                                   # If false, we give the iteration another try adn increment new_proof by 1
+                new_proof += 1
+        
+        
 # Part 2 - Mining our Blockchain
