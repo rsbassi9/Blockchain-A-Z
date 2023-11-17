@@ -26,7 +26,7 @@ class Blockchain:
     # Define a new create block function that will to be implemented right after mining a block
     # It will get the proof of work needed to be solved. once solved, a new block is created and 
     # will be added to the blockchain. The new block will contain the index, the timestamp, proof and previous hash
-    def create_block(self, poof, previous_hash):
+    def create_block(self, proof, previous_hash):
         
         # Variable block is a dictionary containing each block, with 4 essential keys: index of block, timestamp, proof of the block, previous hash. This can potentiall include transactions, cryptocurrency
         block = {'index' : len(self.chain) + 1,
