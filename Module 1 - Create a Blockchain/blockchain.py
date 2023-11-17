@@ -83,8 +83,27 @@ class Blockchain:
         
 # Part 2 - Mining our Blockchain
 
-# Creating a Web App
+# Creating a Web App using Flask
 app = Flask(__name__)
 
 # Creating a Blockchain
 blockchain = Blockchain()
+
+# Mining a new block
+@app.route('/mine_block', methods=['GET'])
+def mine_block():
+    previous_block = blockchain.get_previous_block()  # Get the previous block of the chain so we can check its proof
+    previous_proof = previous_block['proof']
+    proof = blockchain.proof_of_work(previous_proof)  # Proof of the future new block that will be added to the blockchain
+    previous_hash = blockchain.hash(previous_block)
+    block = blockchain.create_block(proof, previous_hash)  # returns the block and appends it to the blockchain
+    # To be displayed in Postman:
+    response = {'message' : 'Congratulations, you just mined a block!',
+                'index' : block['index'],
+                'timestamp' : block['timestamp'],
+                'proof' : block['proof'],
+                'previous_hash' : block['previous_hash']} 
+    return jsonify(response), 200   # 200 = HTTP status code indication everything is OK with the request:  https://en.wikipedia.org/wiki/List_of_HTTP_status_codes          
+
+
+
