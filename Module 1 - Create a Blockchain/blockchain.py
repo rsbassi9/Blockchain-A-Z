@@ -52,5 +52,17 @@ class Blockchain:
             else:                                   # If false, we give the iteration another try adn increment new_proof by 1
                 new_proof += 1
         return new_proof
+    
+    # Implement a function to check if the previous block hash matches, and if the proof od work has been solved (with 4 leading 0's)
+    # It will return the cyptographic hash of our block
+    def hash(self, block):
+       encoded_block = json.dumps(block, sort_keys = True).encode()                        # Encode our block so it can be accepted by the SHA256 function. dumps function used to make the block dictionary a string. encode into the ocrrect format
+       return hashlib.sha256(encoded_block).hexdigest()
+   
+    
+    
+    
+    
+    
         
 # Part 2 - Mining our Blockchain
