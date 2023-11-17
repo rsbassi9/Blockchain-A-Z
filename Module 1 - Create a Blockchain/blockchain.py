@@ -105,5 +105,9 @@ def mine_block():
                 'previous_hash' : block['previous_hash']} 
     return jsonify(response), 200   # 200 = HTTP status code indication everything is OK with the request:  https://en.wikipedia.org/wiki/List_of_HTTP_status_codes          
 
-
-
+# Getting the full Blockchain
+@app.route('/get_chain', methods=['GET'])
+def get_chain():
+    response = {'chain' : blockchain.chain,
+                'length' : len(blockchain.chain)}   # We will also retreive the length of the blockchain so that we can keep track of it as it grows
+    return jsonify(response), 200
