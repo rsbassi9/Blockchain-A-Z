@@ -88,6 +88,14 @@ class Blockchain:
             block_index += 1
         return True
     
+    # Create a new method to create a transaction between a sender and receiver (for a certain amount of coins), which will be added to our list of transactions 
+    def add_transaction(self, sender, receiver, amount):
+        self.transactions.append({'sender' : sender,
+                                  'receiver' : receiver,
+                                  'amount' : amount})
+       previous_block = self.get_previous_block()       # Add this transaction to the new block
+       return previous_block['index'] + 1           # Return the index of the new block that accepts these transactions
+    
         
 # Part 2 - Mining our Blockchain
 
