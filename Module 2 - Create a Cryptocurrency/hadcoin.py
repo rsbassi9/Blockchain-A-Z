@@ -101,8 +101,22 @@ class Blockchain:
         parsed_url = urlparse(address)
         self.nodes.add(parsed_url.netloc)
         
-        
-    
+    def replace_chain(self):        # A Method to replace the any chain that is not the longest, with the longest chain
+        network = self.nodes        # The network is set to the accumulation of all the nodes
+        longest_chain = None        # Initially set to None since we will update this parameter once we loop thorugh all our chains
+        max_length = len(self.chain)    # Set to the length of the chain in the blockchain of th node in which we are applying the replace_chain method
+        for node in network:
+            response = requests.get(f'http://{node}/get_chain')      # A node in the network is represented by the parsed_url.netloc. use of f-string syntax 'f'...{node}..' to implement the node
+            if response.status_code == 200:
+                length = response.json()['length']       # Get the length of the chain
+                chain = response.json()['chain']         # Get the chain
+                if length > max_length and self.is_chain_valid(chain):    # Check that the chain is the longest, and that it is valid
+                    max_length = length         # Update the max length variable
+                    longest_chain = chain       # Now update the longest_chain variable to the current one
+        if longest_chain:               # If longest_chain is not none, it means it was updated, and tehrefore a replacement was made, and therefore the chain was replaced
+            self.chain = longest_chain                            # Replace the chain now
+            return True
+        return False             # If the longest_chain is still set to None, i.e not updated in the for loop,it means our original chain was the longest one, return False to show the chain was not replaced
         
 # Part 2 - Mining our Blockchain
 
