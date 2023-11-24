@@ -27,7 +27,7 @@ class Blockchain:
         self.chain = []     # Variable for The chain containing the blocks initialized as a list
         self.transactions = []      # Create an epmty list to store all the transactions, initialized before the block is created
         self.create_block(proof = 1, previous_hash = '0')    # Variable for Genesis block, created using the create_block function. arguments: proof = arbitrary number, previous hash (arbitraty for genesis block)
-        
+        self.nodes = set()  # Initialize the nodes as a set, not a list. This is because they are not ordered, adn are randomly located across the world
    
     # Define a new create block function that will to be implemented right after mining a block
     # It will get the proof of work needed to be solved. once solved, a new block is created and 
@@ -90,11 +90,18 @@ class Blockchain:
     
     # Create a new method to create a transaction between a sender and receiver (for a certain amount of coins), which will be added to our list of transactions 
     def add_transaction(self, sender, receiver, amount):
-        self.transactions.append({'sender' : sender,
-                                  'receiver' : receiver,
-                                  'amount' : amount})
-       previous_block = self.get_previous_block()       # Add this transaction to the new block
-       return previous_block['index'] + 1           # Return the index of the new block that accepts these transactions
+        self.transactions.append({'sender': sender,
+                              'receiver': receiver,
+                              'amount': amount})
+        previous_block = self.get_previous_block()  # Add this transaction to the new block
+        return previous_block['index'] + 1  # Return the index of the new block that accepts these transactions
+
+   
+    def add_node(self, address):        # Add the address of the node containin it to our set of nodes
+        parsed_url = urlparse(address)
+        self.nodes.add(parsed_url.netloc)
+        
+        
     
         
 # Part 2 - Mining our Blockchain
