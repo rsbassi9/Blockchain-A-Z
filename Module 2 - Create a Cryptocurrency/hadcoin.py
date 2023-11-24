@@ -25,6 +25,7 @@ class Blockchain:
     
     def __init__(self):
         self.chain = []     # Variable for The chain containing the blocks initialized as a list
+        self.transactions = []      # Create an epmty list to store all the transactions, initialized before the block is created
         self.create_block(proof = 1, previous_hash = '0')    # Variable for Genesis block, created using the create_block function. arguments: proof = arbitrary number, previous hash (arbitraty for genesis block)
         
    
@@ -37,7 +38,9 @@ class Blockchain:
         block = {'index' : len(self.chain) + 1,
                  'timestamp' : str(datetime.datetime.now()), #Make the datetime a string for json format
                  'proof' : proof,
-                 'previous_hash' : previous_hash} 
+                 'previous_hash' : previous_hash,
+                 'transactions' : self.transactions}    # The newly created block will now contain all the transactions
+        self.transactions = []      # Now that the transactions have been appended to the block, re-initialize the transactions list to be empty, so that new transactions can be added to it
         self.chain.append(block) # add the newly created block to the chain
         return block # return the block for display in postman
     
