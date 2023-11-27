@@ -164,6 +164,11 @@ def is_valid():
     else:
         response = {'message' : 'Houston, we have a problem. The Blockchain is not valid' }
     return jsonify(response), 200
+
+# Adding a new transaction to the Blockchain
+    # GET request: When you want to get something from the http client - you dont need to create anything
+    # Post request: When you want to Post something to the http client - you need to create something to post. In this case, a json file contaning the keys of the transaction, i.e, the sender, the receiver and the amount of coins to exchange
+@app.route('/add_transaction', methods=['POST'])
     
 # Running the app
 app.run(host = '0.0.0.0', port = 5000)
