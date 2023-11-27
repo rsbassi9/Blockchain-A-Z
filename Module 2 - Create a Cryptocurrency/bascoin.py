@@ -169,6 +169,14 @@ def is_valid():
     # GET request: When you want to get something from the http client - you dont need to create anything
     # Post request: When you want to Post something to the http client - you need to create something to post. In this case, a json file contaning the keys of the transaction, i.e, the sender, the receiver and the amount of coins to exchange
 @app.route('/add_transaction', methods=['POST'])
+def add_transaction():
+    json = request.get_json()       # Posts the json file to postman
+    transaction_keys = ['sender', 'receiver', 'amount']               # Chek that all the keys are present
+    if not all (key in json for key in transaction_keys):           # If the json does not contain all the keys in the transaction_keys variable
+        return 'Some elements of the transaction are missing', 400   # 400 is the http request code for a bad request
+    index = blockchain.add_transaction(json['sender'], json['receiver'], json['amount'])       # If there is no missing key, add the tranaction to the next mined block, get the VALUES of the minded block
+    response = {'message' : f'This transaction will be added to Block {index}'}
+    return jsonify(response), 201    # Return code to show something has been created
     
 # Running the app
 app.run(host = '0.0.0.0', port = 5000)
