@@ -194,6 +194,18 @@ def connect_node():
     response  = {'message': 'All the nodes are now connected. The Bascoin Blockchain now contains the following nodes:',
                  'total_nodes': list(blockchain.nodes)}
     return jsonify(response), 201
+
+# Replacing the chain by the longest chain if needed (i.e if the chain is not up to date)
+@app.route('/replace_chain', methods=['GET'])
+def replace_chain():
+    is_chain_replaced = blockchain.replace_chain()      # Check if the chain needs to be replaced - ture if it needs to
+    if is_chain_replaced:
+        response = {'message' : 'The nodes had different chains so the chain was replaced by the longest one.',
+                    'new_chain' : blockchain.chain}      # Display the new chain
+    else:
+        response = {'message' : 'All good. The chain is the largest one',
+                    'actual_chain' : blockchain.chain}      # Display the chain
+    return jsonify(response), 200
     
     
 # Running the app
