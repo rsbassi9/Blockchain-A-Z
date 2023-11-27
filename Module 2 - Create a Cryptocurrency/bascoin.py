@@ -123,6 +123,10 @@ class Blockchain:
 # Creating a Web App using Flask
 app = Flask(__name__)
 
+# Creating and address for the node on the port 5000, generated using uuid4(). We will replace the '-' in the address generated using this function with nothing
+node_address = str(uuid4()).replace('-','')
+
+
 # Creating a Blockchain
 blockchain = Blockchain()
 
