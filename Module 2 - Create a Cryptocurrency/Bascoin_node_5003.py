@@ -138,7 +138,7 @@ def mine_block():
     proof = blockchain.proof_of_work(previous_proof)  # Proof of the future new block that will be added to the blockchain
     previous_hash = blockchain.hash(previous_block)
     block = blockchain.create_block(proof, previous_hash)  # returns the block and appends it to the blockchain
-    blockchain.add_transaction(sender = node_address, receiver = 'Hadelin', amount = 1)   # Define the sender, the receiver(miner), and the amount a receiver gets for mining the block
+    blockchain.add_transaction(sender = node_address, receiver = 'You', amount = 1)   # Define the sender, the receiver(miner), and the amount a receiver gets for mining the block
     # To be displayed in Postman:
     response = {'message' : 'Congratulations, you just mined a block!',
                 'index' : block['index'],
