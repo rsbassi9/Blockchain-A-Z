@@ -177,6 +177,24 @@ def add_transaction():
     index = blockchain.add_transaction(json['sender'], json['receiver'], json['amount'])       # If there is no missing key, add the tranaction to the next mined block, get the VALUES of the minded block
     response = {'message' : f'This transaction will be added to Block {index}'}
     return jsonify(response), 201    # Return code to show something has been created
+
+# Part 3 - Decentralizing the Blockchain
+
+# Connecting new nodes
+@app.route('/connect_node', methods=['POST'])
+def connect_node():
+    json = request.get_json()
+    # Connect a new node to all the other nodes in the network, contained in our json file
+    nodes = json.get('nodes')
+    if nodes is None :  # Check that the nodes list is not empty
+        return "No node", 400
+    # Loop over the addresses of the nodes and add them, and reurn a message, and the total amount of nodes in the chain
+    for node in nodes:
+        blockchain.add_node(node)
+    response  = {'message': 'All the nodes are now connected. The Bascoin Blockchain now contains the following nodes:',
+                 'total_nodes': list(blockchain.nodes)}
+    return jsonify(response), 201
+    
     
 # Running the app
 app.run(host = '0.0.0.0', port = 5000)
