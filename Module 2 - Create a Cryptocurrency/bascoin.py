@@ -49,7 +49,7 @@ class Blockchain:
         return self.chain[-1]   # Get the last index of the chain
     
     # Define a proof of work - hard to solve, easy to verify
-    # Previous prrof is an element of the problem that miners will need to coonsider to find the new proof
+    # Previous proof is an element of the problem that miners will need to coonsider to find the new proof
     def proof_of_work(self, previous_proof):
         new_proof = 1      # Problem is solved through trial and error, incrementing the proof each time, starting at 1
         check_proof = False     # Initialize to False. When we run the loop and the new proof is found, this turns to true
