@@ -118,7 +118,7 @@ class Blockchain:
             return True
         return False             # If the longest_chain is still set to None, i.e not updated in the for loop,it means our original chain was the longest one, return False to show the chain was not replaced
         
-# Part 2 - Mining our Blockchain
+# Part 2 - Mining our Blockchain 
 
 # Creating a Web App using Flask
 app = Flask(__name__)
@@ -138,12 +138,14 @@ def mine_block():
     proof = blockchain.proof_of_work(previous_proof)  # Proof of the future new block that will be added to the blockchain
     previous_hash = blockchain.hash(previous_block)
     block = blockchain.create_block(proof, previous_hash)  # returns the block and appends it to the blockchain
+    blockchain.add_transaction(sender = node_address, receiver = 'Bassi', amount = 1)   # Define the sender, the receiver(miner), and the amount a receiver gets for mining the block
     # To be displayed in Postman:
     response = {'message' : 'Congratulations, you just mined a block!',
                 'index' : block['index'],
                 'timestamp' : block['timestamp'],
                 'proof' : block['proof'],
-                'previous_hash' : block['previous_hash']} 
+                'previous_hash' : block['previous_hash'],
+                'transactions' : block['transactions']} 
     return jsonify(response), 200   # 200 = HTTP status code indication everything is OK with the request:  https://en.wikipedia.org/wiki/List_of_HTTP_status_codes          
 
 # Getting the full Blockchain
