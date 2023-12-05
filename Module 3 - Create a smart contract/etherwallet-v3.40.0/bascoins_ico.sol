@@ -40,4 +40,14 @@ contract bascoin_ico {
         return equity_usd[investor];
     }
 
+    // Buying Bascoins
+    // Apply the modifier to see if the investor is able to buy
+    function buy_bascoins(address investor,uint usd_invested) external
+    can_buy_bascoins(usd_invested) {  // Link the modifier before opening the {} for teh function
+        uint bascoins_bought = usd_invested * usd_to_bascoins;
+        equity_bascoins[investor] += bascoins_bought;
+        equity_usd[investor] = equity_bascoins[investor] / 1000;  // divide bascoins equity by the price of them in USD
+        total_bascoins_bought += bascoins_bought;  // update the total bascoins bought by adding the new investement
+    }
+
 }
