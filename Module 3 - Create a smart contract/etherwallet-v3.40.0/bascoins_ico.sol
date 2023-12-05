@@ -22,4 +22,11 @@ contract bascoin_ico {
     mapping(address => uint) equity_bascoins;
     mapping(address => uint) equity_usd;
 
+    // Check if investor can buy Bascoins (if they are available for the amount they want to buy)
+    modifier can_buy_bascoins(uint usd_invested){
+        // Get the amount of bascoins that teh investor wants to buy with their dollar amount + total bascoins already bought. This must be  < maximum no. of bascoins
+        require (usd_invested * usd_to_bascoins + total_bascoins_bought <= max_bascoins);
+        _;         
+    }
+
 }
