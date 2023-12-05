@@ -14,11 +14,12 @@ contract bascoin_ico {
 
     // Introducting the total number of Bascoins that have been bought by the investors. Initially = 0
     uint public total_bascoins_bought = 0; 
+    
     // Mapping for the investor address to its equity in Bascoins and USD
 
     // A mapping is a function where the data is stored in an Array
     // This mapping will take teh address of the investor as input, return an interger called equity_bascoins of the investor
     mapping(address => uint) equity_bascoins;
-    mapping(address => uint) equity_USD;
+    mapping(address => uint) equity_usd;
 
 }
