@@ -29,7 +29,7 @@ contract bascoin_ico {
         _;         
     }
 
-    // Getting the equity in Bascoins of an investor (external constant (now replaced by view / pure) means never modified, and is from outside the contract). 
+    // Getting the equity in Bascoins of an investor (external:is from outside the contract.  view / pure: means never modified (a contstant) ). 
     // The function just calls the mapping and returns the value mapped
     function equity_in_bascoins(address investor) external view returns (uint) {
         return equity_bascoins[investor];
@@ -46,7 +46,7 @@ contract bascoin_ico {
     can_buy_bascoins(usd_invested) {  // Link the modifier before opening the {} for teh function
         uint bascoins_bought = usd_invested * usd_to_bascoins;
         equity_bascoins[investor] += bascoins_bought;
-        equity_usd[investor] = equity_bascoins[investor] / 1000;  // divide bascoins equity by the price of them in USD
+        equity_usd[investor] = equity_bascoins[investor] / 1000;  // divide bascoins equity by the price of them in USD to find USD equity
         total_bascoins_bought += bascoins_bought;  // update the total bascoins bought by adding the new investement
     }
 
