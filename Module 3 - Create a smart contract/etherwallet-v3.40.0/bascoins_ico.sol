@@ -18,15 +18,21 @@ contract bascoin_ico {
     // Mapping for the investor address to its equity in Bascoins and USD
 
     // A mapping is a function where the data is stored in an Array
-    // This mapping will take teh address of the investor as input, return an interger called equity_bascoins of the investor
+    // This mapping will take the address of the investor as input, return an interger called equity_bascoins of the investor
     mapping(address => uint) equity_bascoins;
     mapping(address => uint) equity_usd;
 
     // Check if investor can buy Bascoins (if they are available for the amount they want to buy)
     modifier can_buy_bascoins(uint usd_invested){
-        // Get the amount of bascoins that teh investor wants to buy with their dollar amount + total bascoins already bought. This must be  < maximum no. of bascoins
+        // Get the amount of bascoins that the investor wants to buy with their dollar amount + total bascoins already bought. This must be  < maximum no. of bascoins
         require (usd_invested * usd_to_bascoins + total_bascoins_bought <= max_bascoins);
         _;         
+    }
+
+    // Getting the equity in Bascoins of an investor (external constant (now replaced by view / pure) means never modified, and is from outside the contract). 
+    // The function just calls the mapping and returns the value mapped
+    function equity_in_bascoins(address investor) external view returns (uint) {
+        return equity_bascoins[investor];
     }
 
 }
