@@ -50,4 +50,11 @@ contract bascoin_ico {
         total_bascoins_bought += bascoins_bought;  // update the total bascoins bought by adding the new investement
     }
 
+    // Selling Bascoins
+    function sell_bascoins(address investor,uint bascoins_to_sell) external {  
+        equity_bascoins[investor] -= bascoins_to_sell; // Update the the investors balance
+        equity_usd[investor] = equity_bascoins[investor] / 1000;  // divide bascoins equity by the price of them in USD to find USD equity
+        total_bascoins_bought -= bascoins_to_sell;  // update the total bascoins bought by adding the new investement
+    }
+
 }
