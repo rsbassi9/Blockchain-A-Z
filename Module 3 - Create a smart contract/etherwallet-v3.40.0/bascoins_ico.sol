@@ -35,4 +35,9 @@ contract bascoin_ico {
         return equity_bascoins[investor];
     }
 
+    // Getting the equity in USD of an investor 
+    function equity_in_usd(address investor) external view returns (uint) {
+        return equity_usd[investor];
+    }
+
 }
