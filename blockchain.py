@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Nov 16 07:01:46 2023
-
-@author: Rajvir
-"""
-
-=======
 # Module 1 - Create a Blockchain
 
 # To be installed: 
@@ -134,4 +125,3 @@ def is_valid():
 # Running the app
 app.run(host = '0.0.0.0', port = 5000)
 
->>>>>>> 04a7816ba6710111584dc8a3cbae81805b96cb1a
